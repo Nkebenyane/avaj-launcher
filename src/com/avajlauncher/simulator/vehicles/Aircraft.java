@@ -1,5 +1,4 @@
 package com.avajlauncher.simulator.vehicles;
-import com.avajlauncher.weather.Coordinates;
 
 public class Aircraft {
     protected long id;
@@ -8,7 +7,7 @@ public class Aircraft {
 
     private static long IdCounter = 0;
 
-    protected void Aircraft(String name, Coordinates coordinates)
+    Aircraft(String name, Coordinates coordinates)
     {
         this.coordinates = coordinates;
         this.name = name;

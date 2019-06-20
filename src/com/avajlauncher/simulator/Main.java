@@ -51,6 +51,11 @@ public class Main {
             }
             count++;
         }
+        Logger write = new Logger();
+
+        write.out("lol");
+
         return;
+
     }
 }
