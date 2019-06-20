@@ -1,4 +1,6 @@
 package com.avajlauncher.simulator;
+import com.avajlauncher.simulator.vehicles.Baloon;
+
 import java.io.*;
 
 public class Main {
@@ -9,6 +11,10 @@ public class Main {
 
     public static int latitude;
     public static int height;
+
+
+    public static PrintWriter writer;
+
     public static void main(String[] args)throws Exception
     {
         File file = new File("scenario.txt");
@@ -19,6 +25,7 @@ public class Main {
 
         //convert string to integer
         i = Integer.parseInt(st);
+
         System.out.println("number of cycle: " + i);
 
         while ((st = br.readLine()) != null) {
@@ -45,15 +52,17 @@ public class Main {
         while (count <= i) {
             if (i <= 0)
             {
-
                 System.out.println(" number of cycles must be more than zero");
                 return;
             }
             count++;
         }
-        Logger write = new Logger();
 
-        write.out("lol");
+        File simulationFile = new File("simulation.txt");
+        writer = new PrintWriter(simulationFile);
+
+//        writer.println("hello");
+        writer.close();
 
         return;
 

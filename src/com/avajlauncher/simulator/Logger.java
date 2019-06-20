@@ -8,7 +8,7 @@ public class Logger {
 
     public static PrintWriter writer;
 
-    Logger()throws Exception
+    public Logger()throws Exception
     {
         File simulationFile = new File("simulation.txt");
         writer = new PrintWriter(simulationFile);

@@ -1,7 +1,10 @@
 package com.avajlauncher.simulator.vehicles;
 
 import com.avajlauncher.simulator.Logger;
+import com.avajlauncher.simulator.Main;
 import com.avajlauncher.simulator.WeatherTower;
+
+import java.io.PrintWriter;
 
 public class Baloon extends Aircraft implements Flyable {
 
@@ -35,7 +38,7 @@ public class Baloon extends Aircraft implements Flyable {
         this.weatherTower = weatherTower;
         this.weatherTower.register(this);
 
-        Logger.out("Tower says Baloon#:" + this.name + this.id + "registered to weather tower");
-    }
+        Main.writer.println("Tower says Baloon#:" + this.name + this.id + "registered to weather tower");
+        }
 }
 
