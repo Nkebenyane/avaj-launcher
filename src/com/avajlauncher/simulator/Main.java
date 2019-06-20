@@ -1,5 +1,9 @@
 package com.avajlauncher.simulator;
+
+import com.avajlauncher.simulator.vehicles.Aircraft;
+import com.avajlauncher.simulator.vehicles.AircraftFactory;
 import com.avajlauncher.simulator.vehicles.Baloon;
+import com.avajlauncher.simulator.vehicles.Flyable;
 
 import java.io.*;
 
@@ -15,8 +19,7 @@ public class Main {
 
     public static PrintWriter writer;
 
-    public static void main(String[] args)throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         File file = new File("scenario.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
         String st;
@@ -26,7 +29,8 @@ public class Main {
         //convert string to integer
         i = Integer.parseInt(st);
 
-        System.out.println("number of cycle: " + i);
+        File simulationFile = new File("simulation.txt");
+        writer = new PrintWriter(simulationFile);
 
         while ((st = br.readLine()) != null) {
 
@@ -35,33 +39,28 @@ public class Main {
                 if (sp[2] != null) {
                     longitude = Integer.parseInt(sp[2]);
                 }
-                System.out.println("longitude "+longitude);
                 if (sp[3] != null) {
                     latitude = Integer.parseInt(sp[3]);
                 }
-                System.out.println("latitude "+latitude);
                 if (sp[4] != null) {
                     height = Integer.parseInt(sp[4]);
                 }
-                System.out.println("height "+height);
-                System.out.println();
-            }catch (NumberFormatException e) {
+
+            } catch (NumberFormatException e) {
                 System.out.println("The Exception Error: " + e.getMessage());
             }
         }
         while (count <= i) {
-            if (i <= 0)
-            {
+            if (i <= 0) {
                 System.out.println(" number of cycles must be more than zero");
                 return;
             }
             count++;
         }
 
-        File simulationFile = new File("simulation.txt");
-        writer = new PrintWriter(simulationFile);
+        AircraftFactory test = new AircraftFactory();
+        test.newAircraft("Baloon", "B1", longitude, latitude, height);
 
-//        writer.println("hello");
         writer.close();
 
         return;

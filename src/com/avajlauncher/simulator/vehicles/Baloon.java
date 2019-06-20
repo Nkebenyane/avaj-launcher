@@ -13,6 +13,7 @@ public class Baloon extends Aircraft implements Flyable {
     Baloon(String name, Coordinates coordinates) {
         //To access the parent constructor instance variable
         super(name, coordinates);
+        Main.writer.println("Tower says Baloon#: " + " " + this.name + " " + this.id + " registered to weather tower");
     }
 
     public void updateConditions() {
@@ -31,6 +32,7 @@ public class Baloon extends Aircraft implements Flyable {
         if (weather.equals("SNOW")) {
             this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() - 15);
         }
+        Main.writer.println("Tower says Baloon#: " + " " + this.name + " " + this.id + " registered to weather tower");
     }
 
     public void registerTower(WeatherTower weatherTower) {
@@ -41,4 +43,3 @@ public class Baloon extends Aircraft implements Flyable {
         Main.writer.println("Tower says Baloon#:" + this.name + this.id + "registered to weather tower");
         }
 }
-
