@@ -1,69 +1,72 @@
 package com.avajlauncher.simulator;
 
-import com.avajlauncher.simulator.vehicles.Aircraft;
 import com.avajlauncher.simulator.vehicles.AircraftFactory;
-import com.avajlauncher.simulator.vehicles.Baloon;
 import com.avajlauncher.simulator.vehicles.Flyable;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
-    public static int count = 0;
-    public static int i = 0;
-    public static int longitude;
+    public static int count = 1;
+    public static int simulation;
 
+    public static int longitude;
     public static int latitude;
     public static int height;
+    public static  String type;
+    public static String name;
 
-
-    public static PrintWriter writer;
+    public static WeatherTower weatherTower;
+    public static List<Flyable>flyables = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
-        File file = new File("scenario.txt");
-        BufferedReader br = new BufferedReader(new FileReader(file));
+
+//        File file = new File("scenario.txt");
+        BufferedReader br = new BufferedReader(new FileReader(args[0]));
         String st;
 
+        //reading the first line
         st = br.readLine();
+        try{
+            if (st != null)
+            {
+                weatherTower = new WeatherTower();
+                //convert string to integer
+                simulation = Integer.parseInt(st);
 
-        //convert string to integer
-        i = Integer.parseInt(st);
-
-        File simulationFile = new File("simulation.txt");
-        writer = new PrintWriter(simulationFile);
-
-        while ((st = br.readLine()) != null) {
-
-            try {
-                String sp[] = st.split(" ");
-                if (sp[2] != null) {
+                if (simulation < 0)
+                {
+                    System.out.println("Invalid simulation count " + simulation);
+                    System.exit(1);
+                }
+                while ((st = br.readLine()) != null)
+                {
+                    String sp[] = st.split(" ");
+                    type = sp[0];
+                    name = sp[1];
                     longitude = Integer.parseInt(sp[2]);
-                }
-                if (sp[3] != null) {
                     latitude = Integer.parseInt(sp[3]);
-                }
-                if (sp[4] != null) {
                     height = Integer.parseInt(sp[4]);
+
+                    Flyable flyable = AircraftFactory.newAircraft(type,name,longitude,latitude,height);
+                    flyables.add(flyable);
                 }
-
-            } catch (NumberFormatException e) {
-                System.out.println("The Exception Error: " + e.getMessage());
+                for(Flyable flyable : flyables)
+                    flyable.registerTower(weatherTower);
+                while (count <= simulation)
+                {
+                    weatherTower.changeWeather();
+                    count++;
+                }
             }
+
+        }catch (FileNotFoundException e){
+            System.out.println("Couldn't find the file to read ");
+        }finally {
+            Logger.logMessage();
         }
-        while (count <= i) {
-            if (i <= 0) {
-                System.out.println(" number of cycles must be more than zero");
-                return;
-            }
-            count++;
-        }
-
-        AircraftFactory test = new AircraftFactory();
-        test.newAircraft("Baloon", "B1", longitude, latitude, height);
-
-        writer.close();
-
         return;
-
     }
 }

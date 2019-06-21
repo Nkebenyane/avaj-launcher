@@ -1,24 +1,30 @@
 package com.avajlauncher.simulator;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.io.*;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Logger {
 
-    public static PrintWriter writer;
+    public static List<String> messages = new ArrayList<>();
+    public static PrintWriter write;
 
-    public Logger()throws Exception
-    {
-        File simulationFile = new File("simulation.txt");
-        writer = new PrintWriter(simulationFile);
+    public static void logMessage() {
+
+        try{
+            File simulationFile = new File("simulation.txt");
+            write = new PrintWriter(simulationFile);
+            for(String msg: messages) {
+                write.println(msg);
+            }
+            write.close();
+
+        }catch (IOException e) {
+            System.out.println("Something went wrong reading file 'simulation.txt' ");
+            System.exit(1);
+        }
     }
 
-    public static void out(String s)
-    {
-        writer.println(s);
-        writer.flush();
-        writer.close();
+    public static void addMessage(String message) {
+        messages.add(message);
     }
-
 }

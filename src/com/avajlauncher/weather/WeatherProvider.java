@@ -7,9 +7,9 @@ import java.util.Random;
 public class WeatherProvider {
 
 
-    private WeatherProvider weatherProvider;
+    private static WeatherProvider weatherProvider = new WeatherProvider();
 
-    String[] weather;
+    private static String[] weather;
 
     WeatherProvider() {
         weather = new String[4];
@@ -21,15 +21,18 @@ public class WeatherProvider {
     }
 
     public static WeatherProvider getProvider() {
-        WeatherProvider ProviderObj = new WeatherProvider();
-        return ProviderObj;
+        return WeatherProvider.weatherProvider;
     }
 
     public String getCurrentWeather(Coordinates coordinates) {
 
         Random rand = new Random();
         int i;
+        int j;
         i = rand.nextInt(4);
+
+        j = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();
+
         return weather[i];
     }
 }

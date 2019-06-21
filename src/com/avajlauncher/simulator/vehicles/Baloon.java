@@ -1,10 +1,9 @@
 package com.avajlauncher.simulator.vehicles;
 
 import com.avajlauncher.simulator.Logger;
-import com.avajlauncher.simulator.Main;
 import com.avajlauncher.simulator.WeatherTower;
 
-import java.io.PrintWriter;
+import java.util.HashMap;
 
 public class Baloon extends Aircraft implements Flyable {
 
@@ -13,12 +12,19 @@ public class Baloon extends Aircraft implements Flyable {
     Baloon(String name, Coordinates coordinates) {
         //To access the parent constructor instance variable
         super(name, coordinates);
-        Main.writer.println("Tower says Baloon#: " + " " + this.name + " " + this.id + " registered to weather tower");
     }
 
     public void updateConditions() {
         String weather = weatherTower.getWeather(this.coordinates);
 
+
+//        HashMap It stores the data in (Key, Value) pairs.
+
+        HashMap<String, String> something = new HashMap<>();
+        something.put("SUN", "Let's enjoy the good weather and take some pics.");
+        something.put("RAIN", "Damn you rain! You messed up my baloon.");
+        something.put("FOG", "I can't see ");
+        something.put("SNOW", "It's snowing. We're gonna crash.");
 
         if (weather.equals("SUN")) {
             this.coordinates = new Coordinates(coordinates.getLongitude() + 2, coordinates.getLatitude() , coordinates.getHeight() + 4);
@@ -32,7 +38,10 @@ public class Baloon extends Aircraft implements Flyable {
         if (weather.equals("SNOW")) {
             this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() - 15);
         }
-        Main.writer.println("Tower says Baloon#: " + " " + this.name + " " + this.id + " registered to weather tower");
+
+        Logger.addMessage("Baloon#" + this.name + "(" + this.id + "): " + something.get(weather));
+        this.weatherTower.unregister(this);
+//        Logger.addMessage(("Tower says: Baloon# "+ " " + this.name + " (" + this.id + ") unregistered from weather tower"));
     }
 
     public void registerTower(WeatherTower weatherTower) {
@@ -40,6 +49,8 @@ public class Baloon extends Aircraft implements Flyable {
         this.weatherTower = weatherTower;
         this.weatherTower.register(this);
 
-        Main.writer.println("Tower says Baloon#:" + this.name + this.id + "registered to weather tower");
+//        if the height = 0 it should display a message saying  "i am landing"
+
+        Logger.addMessage("Tower says Baloon#: " + " " + this.name + " (" + this.id + ") registered to weather tower");
         }
 }
