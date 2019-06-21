@@ -46,7 +46,7 @@ public class JetPlane extends Aircraft implements Flyable {
         this.weatherTower = weatherTower;
         this.weatherTower.register(this);
 
-        Logger.addMessage("Tower says JetPlane#: " + " " + this.name + " (" + this.id + ") registered to weather tower");
+        Logger.addMessage("Tower says: JetPlane#: " + " " + this.name + " (" + this.id + ") registered to weather tower");
 
     }
 }

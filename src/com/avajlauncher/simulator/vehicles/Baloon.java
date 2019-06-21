@@ -50,7 +50,10 @@ public class Baloon extends Aircraft implements Flyable {
         this.weatherTower.register(this);
 
 //        if the height = 0 it should display a message saying  "i am landing"
-
-        Logger.addMessage("Tower says Baloon#: " + " " + this.name + " (" + this.id + ") registered to weather tower");
+        if (coordinates.getHeight() == 0)
+        {
+            Logger.addMessage("Baloon# " + this.name + this.id + "Landing");
+        }
+        Logger.addMessage("Tower says: Baloon# " + " " + this.name + " (" + this.id + ") registered to weather tower");
         }
 }

@@ -28,10 +28,10 @@ public class WeatherProvider {
 
         Random rand = new Random();
         int i;
-        int j;
+//        int j;
         i = rand.nextInt(4);
 
-        j = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();
+//        j = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();
 
         return weather[i];
     }
