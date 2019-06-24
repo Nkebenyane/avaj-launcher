@@ -20,6 +20,7 @@ public class Tower {
 //        for(int i = 0; i < observers.size(); i++){
 //            observers.get(i).updateConditions();
 //        }
+        //temp is a copy of observer
         ArrayList<Flyable> temp = new ArrayList<>(this.observers);
         for(int i = 0; i < temp.size(); i++)
         {
