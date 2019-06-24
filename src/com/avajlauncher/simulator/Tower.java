@@ -9,11 +9,7 @@ public class Tower {
     private ArrayList<Flyable> observers = new ArrayList<>();
 
     public void register(Flyable flyable){
-        if (observers.contains(flyable)) {
-            return;
-        }else {
-            observers.add(flyable);
-        }
+        observers.add(flyable);
     }
 
     public void unregister(Flyable flyable){
@@ -21,8 +17,17 @@ public class Tower {
     }
     protected void conditionsChanged()
     {
-        for(int i = 0; i < observers.size(); i++){
-            observers.get(i).updateConditions();
+//        for(int i = 0; i < observers.size(); i++){
+//            observers.get(i).updateConditions();
+//        }
+        ArrayList<Flyable> temp = new ArrayList<>(this.observers);
+        for(int i = 0; i < temp.size(); i++)
+        {
+            if (this.observers.contains(temp.get(i)))
+            {
+                temp.get(i).updateConditions();
+            }
         }
+
     }
 }

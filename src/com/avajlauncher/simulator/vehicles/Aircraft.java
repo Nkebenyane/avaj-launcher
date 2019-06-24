@@ -7,15 +7,14 @@ public class Aircraft {
 
     private static long IdCounter = 0;
 
-    Aircraft(String name, Coordinates coordinates)
-    {
+    Aircraft(String name, Coordinates coordinates) {
         this.coordinates = coordinates;
         this.name = name;
         this.IdCounter = nextId();
         this.id = IdCounter;
     }
-    private long nextId()
-    {
+
+    private long nextId() {
         return (++IdCounter);
     }
 }

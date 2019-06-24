@@ -24,7 +24,7 @@ public class JetPlane extends Aircraft implements Flyable {
         something.put("SNOW", "it's snowing. we're going to crash.");
 
         if (weather.equals("SUN")) {
-            this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude() + 10 , coordinates.getHeight() + 2);
+            this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude() + 10 , coordinates.getHeight() + 2 > 100 ? 100 : coordinates.getHeight() + 2);
         }
         if (weather.equals("RAIN")) {
             this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude() + 5 , coordinates.getHeight());
@@ -33,12 +33,16 @@ public class JetPlane extends Aircraft implements Flyable {
             this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude() + 1 , coordinates.getHeight());
         }
         if (weather.equals("SNOW")) {
-            this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() - 7);
+            this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() - 7 < 0 ? 0 : coordinates.getHeight() - 7);
         }
 
         Logger.addMessage("JetPlan#" + this.name + "(" + this.id + "): " + something.get(weather));
-        this.weatherTower.unregister(this);
-//        Logger.addMessage(("Tower says: JetPlane# "+ " " + this.name + " (" + this.id + ") unregistered from weather tower"));
+
+        if (coordinates.getHeight() == 0) {
+
+            this.weatherTower.unregister(this);
+            Logger.addMessage(("Tower says: JetPlane# " + " " + this.name + " (" + this.id + ") unregistered from weather tower"));
+        }
     }
 
     public void registerTower(WeatherTower weatherTower)

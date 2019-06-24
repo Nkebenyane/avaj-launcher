@@ -17,7 +17,6 @@ public class Baloon extends Aircraft implements Flyable {
     public void updateConditions() {
         String weather = weatherTower.getWeather(this.coordinates);
 
-
 //        HashMap It stores the data in (Key, Value) pairs.
 
         HashMap<String, String> something = new HashMap<>();
@@ -27,21 +26,27 @@ public class Baloon extends Aircraft implements Flyable {
         something.put("SNOW", "It's snowing. We're gonna crash.");
 
         if (weather.equals("SUN")) {
-            this.coordinates = new Coordinates(coordinates.getLongitude() + 2, coordinates.getLatitude() , coordinates.getHeight() + 4);
+            this.coordinates = new Coordinates(coordinates.getLongitude() + 2, coordinates.getLatitude() , coordinates.getHeight() + 4 > 100 ? 100 : coordinates.getHeight() + 4);
         }
         if (weather.equals("RAIN")) {
-            this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude() , coordinates.getHeight() - 5);
+            this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude() , coordinates.getHeight() - 5 < 0 ? 0 : coordinates.getHeight() - 5);
         }
         if (weather.equals("FOG")) {
-            this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude() , coordinates.getHeight() - 3);
+            this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude() , coordinates.getHeight() - 3 < 0 ? 0 : coordinates.getHeight() - 3);
         }
         if (weather.equals("SNOW")) {
-            this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() - 15);
+            this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() - 15 < 0 ? 0 : coordinates.getHeight() - 15);
         }
 
         Logger.addMessage("Baloon#" + this.name + "(" + this.id + "): " + something.get(weather));
-        this.weatherTower.unregister(this);
-//        Logger.addMessage(("Tower says: Baloon# "+ " " + this.name + " (" + this.id + ") unregistered from weather tower"));
+
+        if (coordinates.getHeight() == 0)
+        {
+            Logger.addMessage("Baloon# " + this.name + this.id + "Landing");
+            this.weatherTower.unregister(this);
+            Logger.addMessage(("Tower says: Baloon# "+ " " + this.name + " (" + this.id + ") unregistered from weather tower"));
+        }
+
     }
 
     public void registerTower(WeatherTower weatherTower) {
@@ -49,11 +54,6 @@ public class Baloon extends Aircraft implements Flyable {
         this.weatherTower = weatherTower;
         this.weatherTower.register(this);
 
-//        if the height = 0 it should display a message saying  "i am landing"
-        if (coordinates.getHeight() == 0)
-        {
-            Logger.addMessage("Baloon# " + this.name + this.id + "Landing");
-        }
         Logger.addMessage("Tower says: Baloon# " + " " + this.name + " (" + this.id + ") registered to weather tower");
         }
 }

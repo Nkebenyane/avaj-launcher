@@ -24,7 +24,8 @@ public class Logger {
         }
     }
 
-    public static void addMessage(String message) {
+    public static void addMessage(String message)
+    {
         messages.add(message);
     }
 }
