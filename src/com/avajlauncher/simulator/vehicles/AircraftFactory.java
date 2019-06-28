@@ -1,6 +1,6 @@
 package com.avajlauncher.simulator.vehicles;
 
-public class AircraftFactory {
+public abstract class AircraftFactory {
 
     public static Flyable newAircraft(String type, String name, int longitude, int latitude, int height) {
         /*
@@ -8,6 +8,9 @@ public class AircraftFactory {
          */
         Coordinates coordinates = new Coordinates(longitude, latitude, height);
 
+        /*
+        - This object will allow me to call or access the Balloon, Helicopter and JetPlane classes.
+         */
         Flyable object;
 
         if (type.equalsIgnoreCase("Baloon")) {
@@ -23,4 +26,3 @@ public class AircraftFactory {
         return null;
     }
 }
-

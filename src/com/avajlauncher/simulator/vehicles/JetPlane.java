@@ -35,7 +35,6 @@ public class JetPlane extends Aircraft implements Flyable {
         if (weather.equals("SNOW")) {
             this.coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() - 7 < 0 ? 0 : coordinates.getHeight() - 7);
         }
-
         Logger.addMessage("JetPlan#" + this.name + "(" + this.id + "): " + something.get(weather));
 
         if (coordinates.getHeight() == 0) {
@@ -52,6 +51,5 @@ public class JetPlane extends Aircraft implements Flyable {
         this.weatherTower.register(this);
 
         Logger.addMessage("Tower says: JetPlane#: " + " " + this.name + " (" + this.id + ") registered to weather tower");
-
     }
 }
