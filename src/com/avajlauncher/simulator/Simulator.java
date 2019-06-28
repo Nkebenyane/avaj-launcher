@@ -62,10 +62,10 @@ public class Simulator {
             System.out.println("Couldn't find the file to read. " + e.getMessage());
         } catch(ArrayIndexOutOfBoundsException e)
         { 
-            System.out.println("We need a file to read. " + e.getMessage());
+            System.out.println("We need a file to read: Please enter a file name as an arguments " + e.getMessage());
         } catch(NumberFormatException e)
         {
-            System.out.println("Please remove all unessesory space in your text file. " + e.getMessage());
+            System.out.println("Please remove all unnecessary spaces in your text file. " + e.getMessage());
         } finally {
             Logger.logMessage();
         }
