@@ -43,7 +43,7 @@ public class Helicopter extends Aircraft implements Flyable {
             Logger.addMessage(("Tower says: Helicopter# " + " " + this.name + " (" + this.id + ") unregistered from weather tower"));
         }
     }
-
+    
     public void registerTower(WeatherTower weatherTower) {
         this.weatherTower = weatherTower;
         this.weatherTower.register(this);

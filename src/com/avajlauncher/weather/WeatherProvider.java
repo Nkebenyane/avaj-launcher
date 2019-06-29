@@ -27,11 +27,11 @@ public class WeatherProvider {
     public String getCurrentWeather(Coordinates coordinates) {
         Random rand = new Random();
         int i;
-//        int j;
-        i = rand.nextInt(4);
-
-//        j = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();
-
+        i = rand.nextInt(coordinates.getHeight());
+        if (i <= coordinates.getHeight() / 2)
+            i = (coordinates.getLongitude() % 4);
+        else
+            i = (coordinates.getLatitude() % 4);
         return weather[i];
     }
 }
